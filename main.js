@@ -10,13 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/htmlDraw.js":
+/*!*************************!*\
+  !*** ./src/htmlDraw.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"drawWeather\": () => (/* binding */ drawWeather),\n/* harmony export */   \"drawHome\": () => (/* binding */ drawHome)\n/* harmony export */ });\n/* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./weather */ \"./src/weather.js\");\n\r\n\r\nconst API = '2316fb2f745c7ff1232b9e52f05b2491';\r\n\r\nfunction drawWeather(data) {\r\n  const forecast = document.createElement('ul');\r\n  const temp = document.createElement('li');\r\n  temp.textContent = data.main.temp;\r\n\r\n  const tempMax = document.createElement('li');\r\n  tempMax.textContent = data.main.temp_max;\r\n\r\n  const tempMin = document.createElement('li');\r\n  tempMin.textContent = data.main.temp_min;\r\n\r\n  const tempFeel = document.createElement('li');\r\n  tempFeel.textContent = data.main.feels_like;\r\n\r\n  const humidity = document.createElement('li');\r\n  humidity.textContent = data.main.humidity;\r\n\r\n  forecast.appendChild(temp);\r\n  forecast.appendChild(tempMax);\r\n  forecast.appendChild(tempMin);\r\n  forecast.appendChild(tempFeel);\r\n  forecast.appendChild(humidity);\r\n\r\n  return forecast;\r\n}\r\n\r\nfunction drawHome(city) {\r\n  const content = document.querySelector('#content');\r\n  const weather = document.createElement('p');\r\n  const location = city;\r\n  const locationURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API}`;\r\n  (0,_weather__WEBPACK_IMPORTED_MODULE_0__.getWeather)(locationURL)\r\n  .then(function(value) {\r\n    content.appendChild(drawWeather(value));\r\n  })\r\n  .catch(function(err) {\r\n    weather.textContent = 'This is not the location you are looking for!';\r\n    content.appendChild(weather);\r\n  });\r\n  inputLocation.value = \"\";\r\n}\r\n\r\n\r\n\r\n\n\n//# sourceURL=webpack://weather-app/./src/htmlDraw.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./weather */ \"./src/weather.js\");\n\r\n\r\nconst API = '2316fb2f745c7ff1232b9e52f05b2491';\r\nlet city = 'london,us'\r\nlet locationURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API}`;\r\n\r\nconst weather = document.createElement('p');\r\nconst content = document.querySelector('#content');\r\n\r\n(0,_weather__WEBPACK_IMPORTED_MODULE_0__.getWeather)(locationURL)\r\n.then(function(value) {\r\n  console.log(value)\r\n  weather.textContent = JSON.stringify(value);\r\n  content.appendChild(weather);\r\n})\r\n.catch(function(err) {\r\n  weather.textContent = JSON.stringify('This is not the weather you are looking for!');\r\n  content.appendChild(weather);\r\n});\r\n\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _htmlDraw_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./htmlDraw.js */ \"./src/htmlDraw.js\");\n\r\n\r\nconst btnSearch = document.querySelector('#btnSearch');\r\nconst inputLocation = document.querySelector('#inputLocation');\r\n\r\n(0,_htmlDraw_js__WEBPACK_IMPORTED_MODULE_0__.drawHome)('London')\r\n\r\nbtnSearch.addEventListener('click', () => {\r\n  ;(0,_htmlDraw_js__WEBPACK_IMPORTED_MODULE_0__.drawHome)(inputLocation.value);\r\n});\r\n\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
 
 /***/ }),
 

@@ -23,7 +23,7 @@ const selectUnits = document.querySelector('#selectUnits');
 drawHome(location, units, false);
 
 btnSearch.addEventListener('click', () => {
-  location = inputLocation.value;
+  location = inputLocation.value.match(/^[^,-]+/gi).toString();
   localStorage.setItem('location', location);
   drawHome(localStorage.getItem('location'), localStorage.getItem('units'));
 });

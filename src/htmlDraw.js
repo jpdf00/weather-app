@@ -2,14 +2,16 @@ import { getData } from './weather';
 
 const API = '2316fb2f745c7ff1232b9e52f05b2491';
 
-function drawWeather(data) {
+function drawWeather(data, units) {
   console.log(data)
+  const u = (units === 'metric') ? '° C':
+            (units === 'imperial') ? '° F':' K';
 
   const card = document.createElement('div');
   card.setAttribute('class', 'card mb-3 shadow border-0');
 
   const row = document.createElement('div');
-  row.setAttribute('class', 'row g-0 bg-white rounded');
+  row.setAttribute('class', 'row g-0 bg-white rounded pb-1');
 
   const location = document.createElement('h2');
   location.setAttribute('class', 'rounded p-1 text-white text-center card-title align-self-center bg-gradient bg-secondary');
@@ -41,8 +43,8 @@ function drawWeather(data) {
   tempTitleSmall.textContent = 'Current:';
 
   const temp = document.createElement('p');
-  temp.setAttribute('class', 'text-center fs-1 m-0 fw-bold align-middle');
-  temp.textContent = `${data.main.temp}°`;
+  temp.setAttribute('class', 'text-center fs-2 m-0 fw-bold align-middle mt-3');
+  temp.textContent = `${data.main.temp}${u}`;
 
   const tempMaxTitle = document.createElement('p');
   tempMaxTitle.setAttribute('class', 'card-text m-0 text-center');
@@ -53,7 +55,7 @@ function drawWeather(data) {
 
   const tempMax = document.createElement('p');
   tempMax.setAttribute('class', 'card-text m-0 text-center fs-5');
-  tempMax.textContent = `${data.main.temp_max}°`;
+  tempMax.textContent = `${data.main.temp_max}${u}`;
 
   const tempMinTitle = document.createElement('p');
   tempMinTitle.setAttribute('class', 'card-text m-0 text-center');
@@ -64,7 +66,7 @@ function drawWeather(data) {
 
   const tempMin = document.createElement('p');
   tempMin.setAttribute('class', 'card-text m-0 text-center fs-5');
-  tempMin.textContent = `${data.main.temp_min}°`;
+  tempMin.textContent = `${data.main.temp_min}${u}`;
 
   const tempFeelTitle = document.createElement('p');
   tempFeelTitle.setAttribute('class', 'card-text m-0 text-center');
@@ -75,7 +77,7 @@ function drawWeather(data) {
 
   const tempFeel = document.createElement('p');
   tempFeel.setAttribute('class', 'card-text m-0 text-center fs-5');
-  tempFeel.textContent = `${data.main.feels_like}°`;
+  tempFeel.textContent = `${data.main.feels_like}${u}`;
 
   const humidityTitle = document.createElement('p');
   humidityTitle.setAttribute('class', 'card-text m-0 text-center');
@@ -122,22 +124,29 @@ function drawWeather(data) {
   return card;
 }
 
-function drawHome(city, token = true) {
+function drawHome(city, units, token = true) {
   const content = document.querySelector('#content');
   const location = city;
-  const locationURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API}&units=imperial`;
+  const locationURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API}&units=${units}`;
+
+
+  if (token) {
+    content.removeChild(content.lastChild)
+  };
 
   getData(locationURL)
   .then(function(value) {
-    if (token) {
-      content.removeChild(content.lastChild)
-    };
-    content.appendChild(drawWeather(value));
+    content.appendChild(drawWeather(value, units));
+    inputLocation.value = "";
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
   })
   .catch(function(err) {
     content.textContent = 'This is not the location you are looking for!';
   });
-  inputLocation.value = "";
+
 }
 
 

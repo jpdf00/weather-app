@@ -134,7 +134,7 @@ function drawWeather(data, units) {
 function drawHome(city, units, token = true) {
   const content = document.querySelector('#content');
   const location = city;
-  const locationURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_WEATHER}&units=${units}`;
+  const locationURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_WEATHER}&units=${units}`;
 
   getData(locationURL)
     .then((value) => {
@@ -158,7 +158,7 @@ function drawHome(city, units, token = true) {
           figTitle.textContent = weatherMain;
           figDescription.textContent = weatherDescription;
           img.src = response.data.images.original.url;
-          icon.src = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+          icon.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
         });
     })
     .catch((err) => {

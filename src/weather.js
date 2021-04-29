@@ -1,6 +1,6 @@
-async function getWeather(url) {
+async function getData(url) {
   const res = await fetch(url, {method: 'POST', mode: 'cors'})
   return res.json();
 };
 
-export { getWeather };
+export { getData };

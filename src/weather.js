@@ -1,6 +1,6 @@
 async function getData(url) {
-  const res = await fetch(url, {method: 'POST', mode: 'cors'})
+  const res = await fetch(url, { method: 'POST', mode: 'cors' });
   return res.json();
-};
+}
 
-export { getData };
+export default getData;

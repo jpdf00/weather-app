@@ -1,12 +1,12 @@
-import { getData } from './weather';
-import { getGIF } from './animation';
+import getData from './weather';
+import getGIF from './animation';
 
 const API_WEATHER = '2316fb2f745c7ff1232b9e52f05b2491';
 const API_GIPHY = '3X2ApJT7aNnInzDc4ImBbzZLzv0UNSGA&s';
 
 function drawWeather(data, units) {
-  const u = (units === 'metric') ? '° C':
-            (units === 'imperial') ? '° F':' K';
+  let u = (units === 'metric') ? '° C' : '';
+  u = (units === 'imperial') ? '° F' : ' K';
 
   const card = document.createElement('div');
   card.setAttribute('class', 'card mb-3 shadow border-0');
@@ -131,28 +131,29 @@ function drawHome(city, units, token = true) {
   const locationURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_WEATHER}&units=${units}`;
 
   if (token) {
-    content.removeChild(content.lastChild)
-  };
+    content.removeChild(content.lastChild);
+  }
 
   getData(locationURL)
-  .then(function(value) {
-    const weatherMain = value.weather[0].main;
-    const weatherDescription = value.weather[0].description;
-    const weather = `${weatherMain.toLowerCase().split(" ").join("-")}-${weatherDescription.toLowerCase().split(" ").join("-")}`;
-    const animationURL = `https://api.giphy.com/v1/gifs/translate?api_key=${API_GIPHY}&s=${weather}`;
-    content.appendChild(drawWeather(value, units));
-    inputLocation.value = "";
-    getGIF(animationURL)
-    .then(function(response) {
-      const img = document.querySelector('#weatherImg');
-      const figTitle = document.querySelector('#figTitle');
-      figTitle.textContent = `${weatherMain}, ${weatherDescription}`;
-      img.src = response.data.images.original.url;
+    .then((value) => {
+      const inputLocation = document.querySelector('#inputLocation');
+      const weatherMain = value.weather[0].main;
+      const weatherDescription = value.weather[0].description;
+      const weather = `${weatherMain.toLowerCase().split(' ').join('-')}-${weatherDescription.toLowerCase().split(' ').join('-')}`;
+      const animationURL = `https://api.giphy.com/v1/gifs/translate?api_key=${API_GIPHY}&s=${weather}`;
+      content.appendChild(drawWeather(value, units));
+      inputLocation.value = '';
+      getGIF(animationURL)
+        .then((response) => {
+          const img = document.querySelector('#weatherImg');
+          const figTitle = document.querySelector('#figTitle');
+          figTitle.textContent = `${weatherMain}, ${weatherDescription}`;
+          img.src = response.data.images.original.url;
+        });
     })
-  })
-  .catch(function(err) {
-    content.textContent = 'This is not the location you are looking for!';
-  });
+    .catch((err) => {
+      content.textContent = `${err.message}`;
+    });
 }
 
-export { drawWeather, drawHome };
+export default drawHome;

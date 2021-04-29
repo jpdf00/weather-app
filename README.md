@@ -19,7 +19,7 @@ The APP is responsive.
 
 ## Live Demo
 
-[Weather APP](https://livedemo.com)
+[Weather APP](https://jpdf00.github.io/weather-app/)
 
 ## Getting Started*
 

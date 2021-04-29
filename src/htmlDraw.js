@@ -1,5 +1,5 @@
-import getData from './weather';
-import getGIF from './animation';
+import getData from './weather.js';
+import getGIF from './animation.js';
 
 const API_WEATHER = '2316fb2f745c7ff1232b9e52f05b2491';
 const API_GIPHY = '3X2ApJT7aNnInzDc4ImBbzZLzv0UNSGA&s';

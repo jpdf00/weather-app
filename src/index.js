@@ -1,4 +1,4 @@
-import drawHome from './htmlDraw';
+import drawHome from './htmlDraw.js';
 
 let location = 'London,uk';
 let units = 'metric';
@@ -14,7 +14,6 @@ if (!localStorage.getItem('units')) {
 } else {
   units = localStorage.getItem('units');
 }
-
 
 const btnSearch = document.querySelector('#btnSearch');
 const inputLocation = document.querySelector('#inputLocation');

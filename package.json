@@ -20,8 +20,10 @@
   },
   "homepage": "https://github.com/jpdf00/weather-app#readme",
   "devDependencies": {
-    "webpack-dev-server": "^5.2.2",
     "webpack": "^5.36.1",
     "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {
+    "stylelint": "^13.13.0"
   }
 }

@@ -5,8 +5,14 @@ const API_WEATHER = '2316fb2f745c7ff1232b9e52f05b2491';
 const API_GIPHY = '3X2ApJT7aNnInzDc4ImBbzZLzv0UNSGA&s';
 
 function drawWeather(data, units) {
-  let u = (units === 'metric') ? '° C' : '';
-  u = (units === 'imperial') ? '° F' : ' K';
+  let u = '';
+  if (units === 'metric') {
+    u = '° C';
+  } else if (units === 'imperial') {
+    u = '° F';
+  } else {
+    u = ' K';
+  }
 
   const card = document.createElement('div');
   card.setAttribute('class', 'card mb-3 shadow border-0');
@@ -130,12 +136,11 @@ function drawHome(city, units, token = true) {
   const location = city;
   const locationURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_WEATHER}&units=${units}`;
 
-  if (token) {
-    content.removeChild(content.lastChild);
-  }
-
   getData(locationURL)
     .then((value) => {
+      if (token) {
+        content.removeChild(content.lastChild);
+      }
       const inputLocation = document.querySelector('#inputLocation');
       const weatherMain = value.weather[0].main;
       const weatherDescription = value.weather[0].description;

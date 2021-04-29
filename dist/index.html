@@ -13,15 +13,15 @@
 <body>
   <main class="container-fluid">
     <article class="row align-items-center flex-column">
-      <div id="content" class="col-10 col-sm-8 col-xl-6">
+      <section id="content" class="col-10 col-sm-8 col-xl-6 p-0 ">
         <h1 class="text-center my-3 fs-1 shadow p-2 border-0 bg-gradient btn-secondary w-100 rounded">Weather APP</h1>
         <div class="input-group mb-3 shadow">
           <input class="form-control border-0" type="text" name="location" placeholder="Enter your location..." id="inputLocation">
           <button class="btn btn-secondary border-0 bg-gradient" type="button" id="btnSearch"><i class="fas fa-search-location"></i></button>
         </div>
 
-      </div>
-      <div class="col-10 col-sm-8 col-xl-6">
+      </section>
+      <section class="col-10 col-sm-8 col-xl-6 p-0 ">
         <div class="input-group mb-3 shadow">
           <label class="input-group-text bg-secondary border-0 bg-gradient" for="selectUnits"><i class="fas fa-sync-alt text-white"></i></label>
           <select class="form-select border-0" id="selectUnits">
@@ -30,12 +30,12 @@
             <option value="standard">Kelvin</option>
           </select>
         </div>
-      </div>
-      <aside class="row justify-content-center">
-        <figure class="col-10 col-sm-8 col-xl-6 bg-gradient bg-secondary text-white fs-3 text-center">
-          <img src="" alt="A GIF depcting the current weather." id="weatherImg">
-        </figure>
-      </aside>
+      </section>
+      <figure class="d-flex col-10 col-sm-8 col-xl-6 fs-3 p-0 bg-gradient bg-secondary shadow-lg rounded flex-column">
+        <figcaption class="text-white align-self-center" id="figTitle"></figcaption>
+        <img class="container-fluid px-0" src="" alt="A GIF depcting the current weather." id="weatherImg">
+        <figcaption class="text-white-50 fs-6 m-2 align-self-end">- Powered By GIPHY</figcaption>
+      </figure>
     </div>
 
   </main>

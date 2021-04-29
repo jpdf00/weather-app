@@ -1,6 +1,8 @@
 import { getData } from './weather';
+import { getGIF } from './animation';
 
-const API = '2316fb2f745c7ff1232b9e52f05b2491';
+const API_WEATHER = '2316fb2f745c7ff1232b9e52f05b2491';
+const API_GIPHY = '3X2ApJT7aNnInzDc4ImBbzZLzv0UNSGA&s';
 
 function drawWeather(data, units) {
   console.log(data)
@@ -127,8 +129,7 @@ function drawWeather(data, units) {
 function drawHome(city, units, token = true) {
   const content = document.querySelector('#content');
   const location = city;
-  const locationURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API}&units=${units}`;
-
+  const locationURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_WEATHER}&units=${units}`;
 
   if (token) {
     content.removeChild(content.lastChild)
@@ -136,18 +137,24 @@ function drawHome(city, units, token = true) {
 
   getData(locationURL)
   .then(function(value) {
+    const weatherMain = value.weather[0].main;
+    const weatherDescription = value.weather[0].description;
+    const weather = `${weatherMain.toLowerCase().split(" ").join("-")}-${weatherDescription.toLowerCase().split(" ").join("-")}`;
+    const animationURL = `https://api.giphy.com/v1/gifs/translate?api_key=${API_GIPHY}&s=${weather}`;
     content.appendChild(drawWeather(value, units));
     inputLocation.value = "";
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new bootstrap.Tooltip(tooltipTriggerEl)
+    getGIF(animationURL)
+    .then(function(response) {
+      console.log(response);
+      const img = document.querySelector('#weatherImg');
+      const figTitle = document.querySelector('#figTitle');
+      figTitle.textContent = `${weatherMain}, ${weatherDescription}`;
+      img.src = response.data.images.original.url;
     })
   })
   .catch(function(err) {
     content.textContent = 'This is not the location you are looking for!';
   });
-
 }
-
 
 export { drawWeather, drawHome };

@@ -12,15 +12,30 @@
 
 <body>
   <main class="container-fluid">
-    <article class="row justify-content-center">
-      <div id="content" class="col-12 col-sm-6 col-xl-3">
+    <article class="row align-items-center flex-column">
+      <div id="content" class="col-10 col-sm-8 col-xl-6">
         <h1 class="text-center my-3 fs-1 shadow p-2 border-0 bg-gradient btn-secondary w-100 rounded">Weather APP</h1>
-        <div class="input-group mb-3 shadow border-0">
+        <div class="input-group mb-3 shadow">
           <input class="form-control border-0" type="text" name="location" placeholder="Enter your location..." id="inputLocation">
           <button class="btn btn-secondary border-0 bg-gradient" type="button" id="btnSearch"><i class="fas fa-search-location"></i></button>
         </div>
 
       </div>
+      <div class="col-10 col-sm-8 col-xl-6">
+        <div class="input-group mb-3 shadow">
+          <label class="input-group-text bg-secondary border-0 bg-gradient" for="selectUnits"><i class="fas fa-sync-alt text-white"></i></label>
+          <select class="form-select border-0" id="selectUnits">
+            <option value="metric">° Celsius</option>
+            <option value="imperial">° Fahrenheit</option>
+            <option value="standard">Kelvin</option>
+          </select>
+        </div>
+      </div>
+      <aside class="row justify-content-center">
+        <figure class="col-10 col-sm-8 col-xl-6 bg-gradient bg-secondary text-white fs-3 text-center">
+          <img src="" alt="A GIF depcting the current weather." id="weatherImg">
+        </figure>
+      </aside>
     </div>
 
   </main>

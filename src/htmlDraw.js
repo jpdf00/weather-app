@@ -5,7 +5,6 @@ const API_WEATHER = '2316fb2f745c7ff1232b9e52f05b2491';
 const API_GIPHY = '3X2ApJT7aNnInzDc4ImBbzZLzv0UNSGA&s';
 
 function drawWeather(data, units) {
-  console.log(data)
   const u = (units === 'metric') ? '° C':
             (units === 'imperial') ? '° F':' K';
 
@@ -145,7 +144,6 @@ function drawHome(city, units, token = true) {
     inputLocation.value = "";
     getGIF(animationURL)
     .then(function(response) {
-      console.log(response);
       const img = document.querySelector('#weatherImg');
       const figTitle = document.querySelector('#figTitle');
       figTitle.textContent = `${weatherMain}, ${weatherDescription}`;

@@ -141,6 +141,7 @@ function drawHome(city, units, token = true) {
       if (token) {
         content.removeChild(content.lastChild);
       }
+      const iconCode = value.weather[0].icon;
       const inputLocation = document.querySelector('#inputLocation');
       const weatherMain = value.weather[0].main;
       const weatherDescription = value.weather[0].description;
@@ -151,9 +152,13 @@ function drawHome(city, units, token = true) {
       getGIF(animationURL)
         .then((response) => {
           const img = document.querySelector('#weatherImg');
+          const icon = document.querySelector('#weatherIcon');
           const figTitle = document.querySelector('#figTitle');
-          figTitle.textContent = `${weatherMain}, ${weatherDescription}`;
+          const figDescription = document.querySelector('#figDescription');
+          figTitle.textContent = weatherMain;
+          figDescription.textContent = weatherDescription;
           img.src = response.data.images.original.url;
+          icon.src = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
         });
     })
     .catch((err) => {

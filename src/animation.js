@@ -1,8 +1,6 @@
 async function getGIF(url) {
   const res = await fetch(url, { mode: 'cors' })
-  .catch((err) => {
-    return err;
-  });
+    .catch((err) => err);
   return res.json();
 }
 

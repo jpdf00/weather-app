@@ -141,25 +141,101 @@ function drawHome(city, units, token = true) {
       if (token) {
         content.removeChild(content.lastChild);
       }
-      const iconCode = value.weather[0].icon;
       const inputLocation = document.querySelector('#inputLocation');
+      const img = document.querySelector('#weatherImg');
+      const icon = document.querySelector('#weatherIcon');
+      const figTitle = document.querySelector('#figTitle');
+      const figDescription = document.querySelector('#figDescription');
+      const figCaption = document.querySelector('#figCaption');
+      const iconCode = value.weather[0].icon;
       const weatherMain = value.weather[0].main;
       const weatherDescription = value.weather[0].description;
-      const weather = `${weatherMain.toLowerCase().split(' ').join('-')}-${weatherDescription.toLowerCase().split(' ').join('-')}`;
-      const animationURL = `https://api.giphy.com/v1/gifs/translate?api_key=${API_GIPHY}&s=${weather}`;
+      let weatherImg = '../assets/img/weather-'
+      let weatherCaption = ''
       content.appendChild(drawWeather(value, units));
       inputLocation.value = '';
+      icon.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+      figTitle.textContent = weatherMain;
+      figDescription.textContent = weatherDescription;
+      switch (iconCode) {
+        case '01d':
+          weatherImg += '01d.jpg';
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@bencollins?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ben Collins</a> on <a class="text-white" href="https://unsplash.com/s/photos/clear-sky?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '01n':
+          weatherImg += '01n.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@raimondklavins?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Raimond Klavins</a> on <a class="text-white" href="https://unsplash.com/s/photos/clear-sky-night?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '02d':
+          weatherImg += '02d.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@simonfitall?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Simon Fitall</a> on <a class="text-white" href="https://unsplash.com/s/photos/few-clouds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '02n':
+          weatherImg += '02n.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@hyunwonjang?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Hyunwon Jang</a> on <a class="text-white" href="https://unsplash.com/s/photos/clouds-night?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '03d':
+          weatherImg += '03d.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@ortodummie?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Peter Žagar</a> on <a class="text-white" href="https://unsplash.com/s/photos/few-clouds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '03n':
+          weatherImg += '03n.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@martinjernberg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Martin Jernberg</a> on <a class="text-white" href="https://unsplash.com/s/photos/few-clouds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '04d':
+          weatherImg += '04d.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@jplenio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Johannes Plenio</a> on <a class="text-white" href="https://unsplash.com/s/photos/few-clouds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '04n':
+          weatherImg += '04n.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@craighiron?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Craig Hiron</a> on <a class="text-white" href="https://unsplash.com/s/photos/clouds-night?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '09d':
+          weatherImg += '09d.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@isaac_keem?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Andrew Kim</a> on <a class="text-white" href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '09n':
+          weatherImg += '09n.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@eutahm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Eutah Mizushima</a> on <a class="text-white" href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '10d':
+          weatherImg += '10d.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@abingol?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Atilla Bingöl</a> on <a class="text-white" href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '10n':
+          weatherImg += '10n.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@nardly?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Daniel Bernard</a> on <a class="text-white" href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '11d':
+        case '11n':
+          weatherImg += '11.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@paniscusbcn?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Josep Castells</a> on <a class="text-white" href="https://unsplash.com/s/photos/clouds-night?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '13d':
+        case '13n':
+          weatherImg += '13.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@heathermedwards?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Heather M. Edwards</a> on <a class="text-white" href="https://unsplash.com/s/photos/storm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        case '50d':
+        case '50n':
+          weatherImg += '50.jpg'
+          weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@dmtrdon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dimitar Donovski</a> on <a class="text-white" href="https://unsplash.com/s/photos/mist?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+          break;
+        default:
+        weatherImg += '01d.jpg';
+        weatherCaption = 'Photo by <a class="text-white" href="https://unsplash.com/@bencollins?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ben Collins</a> on <a class="text-white" href="https://unsplash.com/s/photos/clear-sky?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>';
+        break;
+      }
+      img.src = weatherImg;
+      figCaption.innerHTML = weatherCaption;
+
+
+      /*const weather = `${weatherMain.toLowerCase().split(' ').join('-')}-${weatherDescription.toLowerCase().split(' ').join('-')}`;
+      const animationURL = `https://api.giphy.com/v1/gifs/translate?api_key=${API_GIPHY}&s=${weather}`;
       getGIF(animationURL)
         .then((response) => {
-          const img = document.querySelector('#weatherImg');
-          const icon = document.querySelector('#weatherIcon');
-          const figTitle = document.querySelector('#figTitle');
-          const figDescription = document.querySelector('#figDescription');
-          figTitle.textContent = weatherMain;
-          figDescription.textContent = weatherDescription;
           img.src = response.data.images.original.url;
-          icon.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-        });
+        });*/
     })
     .catch((err) => {
       content.textContent = `${err.message}`;
